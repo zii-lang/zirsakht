@@ -1,0 +1,22 @@
+#pragma once
+
+#ifndef Z_CORE_CONFIG_HPP
+#define Z_CORE_CONFIG_HPP
+
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+
+#include <Windows.h>
+#endif
+
+namespace Z::Config {
+    inline constexpr int CppStandard = CPP_STANDARD;
+}
+
+#endif
