@@ -3,6 +3,8 @@
 #ifndef Z_CORE_CONFIG_HPP
 #define Z_CORE_CONFIG_HPP
 
+#define CPP_STANDARD @CMAKE_CXX_STANDARD@
+
 #ifdef _WIN32
 #ifndef NOMINMAX
 #define NOMINMAX
@@ -16,7 +18,9 @@
 #endif
 
 namespace Z::Config {
-    inline constexpr int CppStandard = CPP_STANDARD;
-}
+    inline int CppStandard = CPP_STANDARD;
+} // namespace Z::Config
+
+#undef CPP_STANDARD
 
 #endif
