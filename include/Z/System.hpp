@@ -25,6 +25,7 @@
 
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 #endif
 
 #elif defined(__APPLE__) && defined(__MACH__)

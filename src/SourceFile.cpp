@@ -2,9 +2,7 @@
 
 #include <stdexcept>
 
-#if ZCORE_OS_WINDOWS
-#include <Windows.h>
-#elif ZCORE_POSIX
+#if ZCORE_POSIX
 #include <cerrno>
 #include <cstring>
 #include <fcntl.h>
