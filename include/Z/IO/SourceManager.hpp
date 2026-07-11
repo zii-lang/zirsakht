@@ -17,8 +17,7 @@ namespace Z::IO {
         SourceManager() = default;
 
         void add_file(const std::string &path);
-        bool has_source(const std::string &file_id) const;
-        };
+    };
 } // namespace Z::IO
 
 #endif
