@@ -31,12 +31,7 @@ set(zcore_install_incdir "${CMAKE_INSTALL_INCLUDEDIR}")
 set(zcore_sources)
 file(GLOB zcore_sources "src/*.cpp")
 
-configure_file(
-    ${CMAKE_SOURCE_DIR}/ZCoreConfig.hpp.in
-    ${CMAKE_BINARY_DIR}/include/Z/ZCoreConfig.hpp @ONLY
-)
 list(APPEND zcore_includes $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
-list(APPEND zcore_includes $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>)
 
 if(ZCORE_BUILD_SHARED)
 	list(APPEND zcore_build_targets "shared")
