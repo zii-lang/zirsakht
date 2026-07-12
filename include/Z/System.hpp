@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef ZCORE_SYSTEM_HPP
-#define ZCORE_SYSTEM_HPP
-
 // ---------------------------------------------------------
 // Operating System
 // ---------------------------------------------------------
@@ -228,6 +225,4 @@
 #define ZCORE_CPLUSPLUS 1
 #else
 #define ZCORE_CPLUSPLUS 0
-#endif
-
 #endif

@@ -1,4 +1,4 @@
-#include <Z/IO/SourceFile.hpp>
+#include <Z/Core/Source/SourceFile.hpp>
 
 #include <stdexcept>
 
@@ -11,7 +11,7 @@
 #include <unistd.h>
 #endif
 
-namespace Z::IO {
+namespace Z::Core::Source {
     SourceFile::SourceFile(const std::filesystem::path &path) : path(path) {
     }
 
@@ -245,4 +245,4 @@ namespace Z::IO {
 
         return {this->data + start, end - start};
     }
-} // namespace Z::IO
+} // namespace Z::Core::Source

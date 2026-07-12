@@ -1,13 +1,7 @@
-#include <Z/IO/SourceManager.hpp>
+#include <Z/Core/Source/FileId.hpp>
+#include <Z/Core/Source/SourceManager.hpp>
 
+#include <cassert>
 #include <filesystem>
 
-namespace Z::IO {
-
-    void SourceManager::add_file(const std::string &path) {
-        auto absolute = std::filesystem::absolute(path);
-
-        this->sources.emplace(absolute.string(), SourceFile{absolute});
-    }
-
-} // namespace Z::IO
+namespace Z::Core::Source {} // namespace Z::Core::Source

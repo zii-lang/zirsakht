@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef Z_IO_SOURCEFILE_H
-#define Z_IO_SOURCEFILE_H
-
 #include <Z/System.hpp>
 
 #include <cstddef>
@@ -11,7 +8,7 @@
 #include <string_view>
 #include <vector>
 
-namespace Z::IO {
+namespace Z::Core::Source {
     struct SourceFile {
       public:
         explicit SourceFile(const std::filesystem::path &);
@@ -28,6 +25,10 @@ namespace Z::IO {
 
         const std::filesystem::path &get_path() const noexcept {
             return this->path;
+        }
+
+        const std::size_t get_size() const noexcept {
+            return this->size;
         }
 
       private:
@@ -55,6 +56,4 @@ namespace Z::IO {
         int file = -1;
 #endif
     };
-} // namespace Z::IO
-
-#endif
+} // namespace Z::Core::Source
