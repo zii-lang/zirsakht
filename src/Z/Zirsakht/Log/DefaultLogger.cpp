@@ -11,19 +11,19 @@ namespace Z::Zirsakht::Log {
                 this->trace(message);
                 break;
             case Level::Info:
-                this->info(message);
+                // this->info(message);
                 break;
             case Level::Debug:
-                this->debug(message);
+                // this->debug(message);
                 break;
             case Level::Warn:
-                this->warn(message);
+                // this->warn(message);
                 break;
             case Level::Error:
-                this->error(message);
+                // this->error(message);
                 break;
             case Level::Critical:
-                this->critical(message);
+                // this->critical(message);
                 break;
             default:
                 std::cerr << "[Critical] log level not implemented.";

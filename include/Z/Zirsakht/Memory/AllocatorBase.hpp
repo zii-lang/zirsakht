@@ -28,6 +28,7 @@ namespace Z::Zirsakht {
     };
 
     class MallocAllocator : public AllocatorBase<MallocAllocator> {
+      public:
         void *allocate(std::size_t size, std::size_t alignment);
         void  deallocate(const void *ptr, std::size_t size,
                          std::size_t alignment);

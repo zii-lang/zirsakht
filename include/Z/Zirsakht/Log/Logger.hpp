@@ -2,6 +2,7 @@
 
 #include <Z/Zirsakht/Common.hpp>
 
+#include <string>
 #include <string_view>
 
 namespace Z::Zirsakht::Log {

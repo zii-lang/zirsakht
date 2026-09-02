@@ -87,8 +87,10 @@ endif()
 # Tests
 # ============================================================================
 
+file(GLOB_RECURSE test_sources "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+
 add_executable(libzirsakht_tests
-	${CMAKE_CURRENT_SOURCE_DIR}/GoogleTestTesting.cpp
+	${test_sources}
 )
 
 target_link_libraries(libzirsakht_tests

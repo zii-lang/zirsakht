@@ -28,7 +28,7 @@ set(zirsakht_install_objdir "${CMAKE_INSTALL_LIBDIR}")
 set(zirsakht_install_incdir "${CMAKE_INSTALL_INCLUDEDIR}")
 
 set(zirsakht_sources)
-file(GLOB zirsakht_sources "src/*.cpp")
+file(GLOB_RECURSE zirsakht_sources "src/*.cpp")
 
 list(APPEND zirsakht_includes
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

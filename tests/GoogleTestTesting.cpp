@@ -36,7 +36,7 @@ namespace Z::Zirsakht::Tests {
         EXPECT_EQ(value, "GoogleTest");
     }
 
-    TEST(ZIRSAKHT, CheckLibZirsakhtExist) {
+    TEST(Zirsakht, CheckLibZirsakhtExist) {
 #if defined(_WIN32)
         const std::filesystem::path dynamic_path("../zirsakht.dll");
         const std::filesystem::path static_path("../zirsakht.lib");
