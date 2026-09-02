@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-#if ZCORE_POSIX
+#if ZIRSAKHT_POSIX
 #include <cerrno>
 #include <cstring>
 #include <fcntl.h>
@@ -24,10 +24,10 @@ namespace Z::IO {
         path(std::move(other.path)), data(other.data), size(other.size),
         line_offsets(std::move(other.line_offsets)),
         file_changed(other.file_changed)
-#if ZCORE_OS_WINDOWS
+#if ZIRSAKHT_OS_WINDOWS
         ,
         file(other.file), mapping(other.mapping)
-#elif ZCORE_POSIX
+#elif ZIRSAKHT_POSIX
         ,
         file(other.file)
 #endif
@@ -37,10 +37,10 @@ namespace Z::IO {
         other.file_changed = true;
         other.line_offsets.clear();
 
-#if ZCORE_OS_WINDOWS
+#if ZIRSAKHT_OS_WINDOWS
         other.file    = INVALID_HANDLE_VALUE;
         other.mapping = nullptr;
-#elif ZCORE_POSIX
+#elif ZIRSAKHT_POSIX
         other.file = -1;
 #endif
     }
@@ -58,13 +58,13 @@ namespace Z::IO {
         this->line_offsets = std::move(other.line_offsets);
         this->file_changed = other.file_changed;
 
-#if ZCORE_OS_WINDOWS
+#if ZIRSAKHT_OS_WINDOWS
         this->file    = other.file;
         this->mapping = other.mapping;
 
         other.file    = INVALID_HANDLE_VALUE;
         other.mapping = nullptr;
-#elif ZCORE_POSIX
+#elif ZIRSAKHT_POSIX
         this->file = other.file;
 
         other.file = -1;
@@ -79,7 +79,7 @@ namespace Z::IO {
     }
 
     void SourceFile::open_file() {
-#if ZCORE_OS_WINDOWS
+#if ZIRSAKHT_OS_WINDOWS
         if (INVALID_HANDLE_VALUE != this->file)
             return;
 
@@ -99,7 +99,7 @@ namespace Z::IO {
         }
 
         this->size = static_cast<std::size_t>(size.QuadPart);
-#elif ZCORE_POSIX
+#elif ZIRSAKHT_POSIX
         if (-1 != this->file) {
             return;
         }
@@ -124,14 +124,14 @@ namespace Z::IO {
     }
 
     void SourceFile::close_file() noexcept {
-#if ZCORE_OS_WINDOWS
+#if ZIRSAKHT_OS_WINDOWS
         if (INVALID_HANDLE_VALUE != this->file) {
             CloseHandle(this->file);
             this->file = INVALID_HANDLE_VALUE;
         }
 
         this->size = 0;
-#elif ZCORE_POSIX
+#elif ZIRSAKHT_POSIX
         if (-1 != this->file) {
             close(this->file);
             this->file = -1;
@@ -146,11 +146,11 @@ namespace Z::IO {
             return;
         }
 
-#if ZCORE_OS_WINDOWS
+#if ZIRSAKHT_OS_WINDOWS
         if (INVALID_HANDLE_VALUE == this->file) {
             this->open_file();
         }
-#elif ZCORE_POSIX
+#elif ZIRSAKHT_POSIX
         if (-1 == this->file) {
             this->open_file();
         }
@@ -163,7 +163,7 @@ namespace Z::IO {
             return;
         }
 
-#if ZCORE_OS_WINDOWS
+#if ZIRSAKHT_OS_WINDOWS
         this->mapping = CreateFileMappingW(this->file, nullptr, PAGE_READONLY,
                                            0, 0, nullptr);
 
@@ -180,7 +180,7 @@ namespace Z::IO {
 
             throw std::system_error(GetLastError(), std::system_category());
         }
-#elif ZCORE_POSIX
+#elif ZIRSAKHT_POSIX
         this->data = static_cast<const char *>(
             mmap(nullptr, this->size, PROT_READ, MAP_PRIVATE, this->file, 0));
         if (MAP_FAILED == this->data) {
@@ -191,7 +191,7 @@ namespace Z::IO {
     }
 
     void SourceFile::unmap() noexcept {
-#if ZCORE_OS_WINDOWS
+#if ZIRSAKHT_OS_WINDOWS
         if (this->data) {
             UnmapViewOfFile(this->data);
             this->data = nullptr;
@@ -201,7 +201,7 @@ namespace Z::IO {
             CloseHandle(this->mapping);
             this->mapping = nullptr;
         }
-#elif ZCORE_POSIX
+#elif ZIRSAKHT_POSIX
         if (this->data) {
             munmap(const_cast<char *>(this->data), this->size);
             this->data = nullptr;
