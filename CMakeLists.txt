@@ -118,3 +118,14 @@ if(ZIRSAKHT_BUILD_STATIC)
 	)
 	add_library(zirsakht::static ALIAS zirsakht-static)
 endif()
+
+# Install include directories
+install(
+	DIRECTORY include
+	DESTINATION ${zirsakht_install_incdir}
+)
+
+if(ZIRSAKHT_ENABLE_TESTS)
+	enable_testing()
+	add_subdirectory(tests)
+endif()
