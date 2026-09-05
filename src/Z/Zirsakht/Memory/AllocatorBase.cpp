@@ -17,7 +17,7 @@ namespace Z::Zirsakht {
 #endif
 
     void *ConstructAllocator::allocate(std::size_t size,
-                                       std::size_t alignment) {
+                                       std::size_t alignment) const {
         void *buf = ::operator new(size,
 #ifdef __cpp_aligned_new
                                    std::align_val_t(alignment),
@@ -28,11 +28,17 @@ namespace Z::Zirsakht {
             // TODO: report error.
             exit(EXIT_FAILURE);
         }
+
+        ++this->m_allocation_count;
+
         return buf;
     }
 
     void ConstructAllocator::deallocate(const void *ptr, std::size_t size,
-                                        std::size_t alignment) {
+                                        std::size_t alignment) const {
+        if (ptr == nullptr)
+            return;
+
         ::operator delete(const_cast<void *>(ptr)
 #ifdef __cpp_sized_deallocation
                               ,
@@ -43,9 +49,11 @@ namespace Z::Zirsakht {
                           std::align_val_t(alignment)
 #endif
         );
+        --this->m_allocation_count;
     }
 
-    void *MallocAllocator::allocate(std::size_t size, std::size_t alignment) {
+    void *MallocAllocator::allocate(std::size_t size,
+                                    std::size_t alignment) const {
         if (size == 0)
             return nullptr;
 
@@ -88,13 +96,16 @@ namespace Z::Zirsakht {
         if (ptr == nullptr)
             throw std::bad_alloc();
 
+        ++this->m_allocation_count;
+
         return ptr;
     }
 
-    void MallocAllocator::deallocate(const void *ptr, std::size_t /*size*/,
-                                     std::size_t alignment) {
+    void MallocAllocator::deallocate(const void *ptr, std::size_t size,
+                                     std::size_t alignment) const {
         if (ptr == nullptr)
             return;
+        (void) size;
 
 #if ZIRSAKHT_OS_WINDOWS
 
@@ -112,7 +123,8 @@ namespace Z::Zirsakht {
 #else
 
         std::free(const_cast<void *>(ptr));
-
 #endif
+
+        --this->m_allocation_count;
     }
 } // namespace Z::Zirsakht

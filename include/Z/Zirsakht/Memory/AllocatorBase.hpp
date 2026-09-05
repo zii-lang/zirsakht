@@ -5,6 +5,9 @@
 namespace Z::Zirsakht {
     template<typename DerivedT>
     class AllocatorBase {
+      protected:
+        mutable std::size_t m_allocation_count = 0;
+
       public:
         inline void *allocate(std::size_t size, std::size_t alignment) {
             return static_cast<DerivedT *>(this)->allocate(size, alignment);
@@ -24,6 +27,11 @@ namespace Z::Zirsakht {
         void deallocate(const T *ptr, std::size_t count = 1) {
             deallocate(ptr, count * sizeof(T), alignof(T));
         }
+
+        [[nodiscard]]
+        std::size_t allocation_count() const noexcept {
+            return m_allocation_count;
+        }
     };
 
     class ConstructAllocator : public AllocatorBase<ConstructAllocator> {
@@ -31,9 +39,9 @@ namespace Z::Zirsakht {
         using AllocatorBase<ConstructAllocator>::allocate;
         using AllocatorBase<ConstructAllocator>::deallocate;
 
-        void *allocate(std::size_t size, std::size_t alignment);
+        void *allocate(std::size_t size, std::size_t alignment) const;
         void  deallocate(const void *ptr, std::size_t size,
-                         std::size_t alignment);
+                         std::size_t alignment) const;
     };
 
     class MallocAllocator : public AllocatorBase<MallocAllocator> {
@@ -41,8 +49,8 @@ namespace Z::Zirsakht {
         using AllocatorBase<MallocAllocator>::allocate;
         using AllocatorBase<MallocAllocator>::deallocate;
 
-        void *allocate(std::size_t size, std::size_t alignment);
+        void *allocate(std::size_t size, std::size_t alignment) const;
         void  deallocate(const void *ptr, std::size_t size,
-                         std::size_t alignment);
+                         std::size_t alignment) const;
     };
 } // namespace Z::Zirsakht
