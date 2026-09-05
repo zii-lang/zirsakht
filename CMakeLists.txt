@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 include(FetchContent)
 include(CheckIncludeFiles)
 include(GNUInstallDirs)
+include(cmake/zirsakht-version.cmake)
 
 # -- Options --
 option(ZIRSAKHT_BUILD_SHARED "Build shared library" ON)
