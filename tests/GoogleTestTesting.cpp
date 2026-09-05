@@ -36,15 +36,15 @@ namespace Z::Zirsakht::Tests {
         EXPECT_EQ(value, "GoogleTest");
     }
 
-    TEST(Zirsakht, CheckLibZirsakhtExist) {
 #if defined(_WIN32)
+    TEST(Zirsakht, CheckLibZirsakhtExist) {
         const std::filesystem::path dynamic_path("../zirsakht.dll");
         const std::filesystem::path static_path("../zirsakht.lib");
 
         EXPECT_TRUE(std::filesystem::exists(dynamic_path) ||
                     std::filesystem::exists(dynamic_path));
-#endif
     }
+#endif
 } // namespace Z::Zirsakht::Tests
 
 int main(int argc, char **argv) {
