@@ -39,9 +39,9 @@ namespace Z::Zirsakht {
         using AllocatorBase<ConstructAllocator>::allocate;
         using AllocatorBase<ConstructAllocator>::deallocate;
 
-        void *allocate(std::size_t size, std::size_t alignment) const;
+        void *allocate(std::size_t size, std::size_t alignment);
         void  deallocate(const void *ptr, std::size_t size,
-                         std::size_t alignment) const;
+                         std::size_t alignment);
     };
 
     class MallocAllocator : public AllocatorBase<MallocAllocator> {
@@ -49,8 +49,8 @@ namespace Z::Zirsakht {
         using AllocatorBase<MallocAllocator>::allocate;
         using AllocatorBase<MallocAllocator>::deallocate;
 
-        void *allocate(std::size_t size, std::size_t alignment) const;
+        void *allocate(std::size_t size, std::size_t alignment);
         void  deallocate(const void *ptr, std::size_t size,
-                         std::size_t alignment) const;
+                         std::size_t alignment);
     };
 } // namespace Z::Zirsakht

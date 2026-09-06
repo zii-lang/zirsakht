@@ -17,7 +17,7 @@ namespace Z::Zirsakht {
 #endif
 
     void *ConstructAllocator::allocate(std::size_t size,
-                                       std::size_t alignment) const {
+                                       std::size_t alignment) {
         void *buf = ::operator new(size,
 #ifdef __cpp_aligned_new
                                    std::align_val_t(alignment),
@@ -35,7 +35,7 @@ namespace Z::Zirsakht {
     }
 
     void ConstructAllocator::deallocate(const void *ptr, std::size_t size,
-                                        std::size_t alignment) const {
+                                        std::size_t alignment) {
         if (ptr == nullptr)
             return;
 
@@ -52,8 +52,7 @@ namespace Z::Zirsakht {
         --this->m_allocation_count;
     }
 
-    void *MallocAllocator::allocate(std::size_t size,
-                                    std::size_t alignment) const {
+    void *MallocAllocator::allocate(std::size_t size, std::size_t alignment) {
         if (size == 0)
             return nullptr;
 
@@ -102,7 +101,7 @@ namespace Z::Zirsakht {
     }
 
     void MallocAllocator::deallocate(const void *ptr, std::size_t size,
-                                     std::size_t alignment) const {
+                                     std::size_t alignment) {
         if (ptr == nullptr)
             return;
         (void) size;

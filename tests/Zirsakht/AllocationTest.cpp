@@ -107,4 +107,23 @@ namespace Z::Zirsakht::Tests {
 
         EXPECT_EQ(allocator.allocation_count(), 0);
     }
+
+    TEST(ConstructAllocatorTest, AllAllocationsAreReleased) {
+        ConstructAllocator allocator;
+
+        EXPECT_EQ(allocator.allocation_count(), 0);
+
+        auto *a = allocator.allocate<int>(100);
+        auto *b = allocator.allocate<double>(50);
+
+        EXPECT_EQ(allocator.allocation_count(), 2);
+
+        allocator.deallocate(a, 100 * sizeof(int), alignof(int));
+
+        EXPECT_EQ(allocator.allocation_count(), 1);
+
+        allocator.deallocate(b, 50 * sizeof(double), alignof(double));
+
+        EXPECT_EQ(allocator.allocation_count(), 0);
+    }
 } // namespace Z::Zirsakht::Tests
