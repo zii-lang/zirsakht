@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 
 #include <Z/Zirsakht/Memory/AllocatorBase.hpp>
-#include <Z/Zirsakht/Memory/PoolAllocator.hpp>
 
 namespace Z::Zirsakht::Memory::Tests {
     TEST(ConstructAllocatorTest, ConstructAllocator) {

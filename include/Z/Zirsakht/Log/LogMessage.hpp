@@ -31,5 +31,4 @@ namespace Z::Zirsakht::Log {
         Timepoint  timestamp{std::chrono::system_clock::now()};
         Stringview payload;
     };
-
 }; // namespace Z::Zirsakht::Log
