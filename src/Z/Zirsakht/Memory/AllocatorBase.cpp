@@ -6,16 +6,7 @@
 #include <new>
 #include <stdexcept>
 
-namespace Z::Zirsakht {
-#ifdef ZIRSAKHT_OS_WINDOWS
-    static int check_align(size_t align) {
-        for (size_t i = sizeof(void *); i != 0; i *= 2)
-            if (align == i)
-                return 0;
-        return EINVAL;
-    }
-#endif
-
+namespace Z::Zirsakht::Memory {
     void *ConstructAllocator::allocate(std::size_t size,
                                        std::size_t alignment) {
         void *buf = ::operator new(size,
@@ -126,4 +117,4 @@ namespace Z::Zirsakht {
 
         --this->m_allocation_count;
     }
-} // namespace Z::Zirsakht
+} // namespace Z::Zirsakht::Memory

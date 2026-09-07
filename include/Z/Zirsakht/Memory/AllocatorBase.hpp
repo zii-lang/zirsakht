@@ -2,7 +2,7 @@
 
 #include <cstddef>
 
-namespace Z::Zirsakht {
+namespace Z::Zirsakht::Memory {
     template<typename DerivedT>
     class AllocatorBase {
       protected:
@@ -53,4 +53,4 @@ namespace Z::Zirsakht {
         void  deallocate(const void *ptr, std::size_t size,
                          std::size_t alignment);
     };
-} // namespace Z::Zirsakht
+} // namespace Z::Zirsakht::Memory

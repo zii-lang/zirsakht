@@ -3,5 +3,5 @@
 #include <Z/Zirsakht/Memory/AllocatorBase.hpp>
 
 namespace Z::Zirsakht {
-    static ConstructAllocator allocator;
+    static Memory::ConstructAllocator allocator;
 } // namespace Z::Zirsakht

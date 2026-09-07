@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
 
 #include <Z/Zirsakht/Memory/AllocatorBase.hpp>
+#include <Z/Zirsakht/Memory/PoolAllocator.hpp>
 
-namespace Z::Zirsakht::Tests {
+namespace Z::Zirsakht::Memory::Tests {
     TEST(ConstructAllocatorTest, ConstructAllocator) {
         ConstructAllocator allocator;
 
@@ -126,4 +127,4 @@ namespace Z::Zirsakht::Tests {
 
         EXPECT_EQ(allocator.allocation_count(), 0);
     }
-} // namespace Z::Zirsakht::Tests
+} // namespace Z::Zirsakht::Memory::Tests
