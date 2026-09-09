@@ -15,9 +15,7 @@ namespace Z::Zirsakht::Log {
       public:
         explicit Logger(std::string name) : _name(std::move(name)) {};
         virtual ~Logger() = default;
-        Logger(const Logger &other);
         Logger(Logger &&other) ZIRSAKHT_NOEXCEPT;
-        Logger &operator=(const Logger &other);
         Logger &operator=(Logger &&other) ZIRSAKHT_NOEXCEPT;
 
         virtual void log(Level level, std::string_view message) = 0;
