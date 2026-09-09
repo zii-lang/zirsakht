@@ -1,4 +1,4 @@
-#include <Z/Zirsakht/Log/Formatter.hpp>
+#include <Z/Zirsakht/Log/DefaultFormatter.hpp>
 #include <chrono>
 #include <format>
 
@@ -24,10 +24,19 @@ namespace Z::Zirsakht::Log {
         return "UNKNOWN";
     }
 
-    void format(const LogMessage &message, DestenationBufferType &dest) {
+    void DefaultFormatter::format(const LogMessage      &message,
+                                  DestenationBufferType &dest) {
+        auto seconds = std::chrono::time_point_cast<std::chrono::seconds>(
+            message.timestamp);
+
+        const auto logger_name =
+            message.logger_name.empty()
+                ? std::string{}
+                : std::format("[{}] ", message.logger_name);
+
         const auto formatted = std::format(
-            "[{:%Y-%m-%d %H:%M:%S}] [{}] [{}] {}", message.timestamp,
-            level_name(message.level), message.logger_name, message.payload);
+            "[{:%Y-%m-%d %H:%M:%S}] {}[{}] {}", seconds, logger_name,
+            level_name(message.level), message.payload);
 
         dest.append(formatted);
     }

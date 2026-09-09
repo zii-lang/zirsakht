@@ -29,10 +29,10 @@ namespace Z::Zirsakht::Log::Tests {
 
         Buffer buffer;
 
-        DefaultFormatter::format(message, buffer);
+        DefaultFormatter::instance().format(message, buffer);
 
         EXPECT_EQ(view(buffer),
-                  "[2025-09-07 07:30:42.123] [INFO] [Lexer] Starting lexing");
+                  "[2025-09-07 11:30:42] [Lexer] [INFO] Starting lexing");
     }
 
     TEST_F(LogFormatTest, FormatsEmptyLoggerName) {
@@ -45,10 +45,10 @@ namespace Z::Zirsakht::Log::Tests {
 
         Buffer buffer;
 
-        format(message, buffer);
+        DefaultFormatter::instance().format(message, buffer);
 
         EXPECT_EQ(view(buffer),
-                  "[2025-09-07 07:30:42.000] [ERROR] [] Something went wrong");
+                  "[2025-09-07 11:30:42] [ERROR] Something went wrong");
     }
 
     TEST_F(LogFormatTest, FormatsEmptyMessage) {
@@ -60,9 +60,9 @@ namespace Z::Zirsakht::Log::Tests {
 
         Buffer buffer;
 
-        format(message, buffer);
+        DefaultFormatter::instance().format(message, buffer);
 
-        EXPECT_EQ(view(buffer), "[2025-09-07 07:30:42.000] [DEBUG] [Parser] ");
+        EXPECT_EQ(view(buffer), "[2025-09-07 11:30:42] [Parser] [DEBUG] ");
     }
 
     TEST_F(LogFormatTest, FormatsDifferentLevels) {
@@ -77,7 +77,7 @@ namespace Z::Zirsakht::Log::Tests {
 
         const TestCase cases[] = {
             {Level::Trace, "TRACE"}, {Level::Debug, "DEBUG"},
-            {Level::Info, "INFO"},   {Level::Warning, "WARN"},
+            {Level::Info, "INFO"},   {Level::Warn, "WARN"},
             {Level::Error, "ERROR"}, {Level::Critical, "CRITICAL"},
             {Level::Off, "OFF"},
         };
@@ -87,7 +87,7 @@ namespace Z::Zirsakht::Log::Tests {
 
             Buffer buffer;
 
-            format(message, buffer);
+            DefaultFormatter::instance().format(message, buffer);
 
             EXPECT_NE(view(buffer).find(test.expected), std::string_view::npos);
         }
@@ -100,7 +100,7 @@ namespace Z::Zirsakht::Log::Tests {
 
         ASSERT_TRUE(buffer.empty());
 
-        format(message, buffer);
+        DefaultFormatter::instance().format(message, buffer);
 
         EXPECT_FALSE(buffer.empty());
     }

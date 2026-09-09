@@ -28,7 +28,8 @@ namespace Z::Zirsakht::Log {
 
         Stringview logger_name{};
         Level      level{Level::Off};
-        Timepoint  timestamp{std::chrono::system_clock::now()};
+        Timepoint  timestamp{std::chrono::zoned_time{
+            std::chrono::current_zone(), std::chrono::system_clock::now()}};
         Stringview payload;
     };
 }; // namespace Z::Zirsakht::Log
