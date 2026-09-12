@@ -45,7 +45,14 @@ endif()
 
 # ----- external libraries -----
 
+include(cmake/zirsakht-spdlog.cmake)
+if(ZIRSAKHT_HAS_SPDLOG)
+	list(APPEND zirsakht_libraries spdlog::spdlog)
+endif()
+
 # ------------------------------
+
+include(cmake/zirsakht-config.cmake)
 
 message(STATUS "")
 message(STATUS "Library Name        : ${zirsakht_libname}")

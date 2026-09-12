@@ -1,15 +1,20 @@
-option(ZIRSAKHT_USE_SPDLOG "Forces use of spdlog library." OFF)
+option(ZIRSAKHT_USE_SPDLOG
+	"Forces use of spdlog library."
+	OFF
+)
+
+if(ZIRSAKHT_ENABLE_TESTS)
+	set(ZIRSAKHT_USE_SPDLOG ON)
+endif()
 
 set(ZIRSAKHT_HAS_SPDLOG OFF)
 
 if(ZIRSAKHT_USE_SPDLOG)
 
-	# ==========================================================================
-	# Find spdlog
-	# ==========================================================================
-
 	if(SPDLOG_DIR)
-		message(STATUS "Looking for `spdlog` in SPDLOG_DIR: ${SPDLOG_DIR}")
+		message(STATUS
+			"Looking for `spdlog` in SPDLOG_DIR: ${SPDLOG_DIR}"
+		)
 
 		find_package(spdlog CONFIG QUIET
 			PATHS "${SPDLOG_DIR}"
@@ -17,17 +22,14 @@ if(ZIRSAKHT_USE_SPDLOG)
 		)
 	endif()
 
-	# Then try the normal system/vcpkg/package-manager locations.
 	if(NOT spdlog_FOUND)
 		find_package(spdlog CONFIG QUIET)
 	endif()
 
-	# ==========================================================================
-	# Fetch spdlog if it wasn't found
-	# ==========================================================================
-
 	if(NOT spdlog_FOUND)
-		message(STATUS "spdlog not found; fetching spdlog with FetchContent.")
+		message(STATUS
+			"spdlog not found; fetching spdlog with FetchContent."
+		)
 
 		include(FetchContent)
 
@@ -41,14 +43,15 @@ if(ZIRSAKHT_USE_SPDLOG)
 			TRUE
 		)
 
-		# Don't install spdlog when installing this project.
 		set(SPDLOG_INSTALL OFF CACHE BOOL "" FORCE)
 
 		FetchContent_MakeAvailable(spdlog)
+		set_target_properties(spdlog
+			PROPERTIES POSITION_INDEPENDENT_CODE ON
+		)
 	endif()
 
-	if(spdlog_FOUND)
+	if(TARGET spdlog::spdlog)
 		set(ZIRSAKHT_HAS_SPDLOG ON)
 	endif()
-
 endif()

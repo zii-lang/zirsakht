@@ -8,7 +8,7 @@ namespace Z::Zirsakht::Log {
     class ILogger {
       protected:
         std::string_view _name;
-        Level            _log_level;
+        Level            _log_level = Level::Info;
 
       public:
         virtual ~ILogger()                                      = default;

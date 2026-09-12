@@ -9,7 +9,8 @@ namespace Z::Zirsakht::Log {
       public:
         void log(Level level, std::string_view message) override;
 
-        template<typename... args>
-        void log(Level level, std::string_view format, args... arguments);
+        template<typename... Args>
+        void log(Level level, std::format_string<Args...> format,
+                 Args &&...args);
     };
 } // namespace Z::Zirsakht::Log
