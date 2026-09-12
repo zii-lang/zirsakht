@@ -227,10 +227,24 @@
 #define ZIRSAKHT_CPLUSPLUS 0
 #endif
 
-#if defined(_MSC_VER) && (_MSC_VER < 1900)
-#define ZIRSAKHT_NOEXCEPT _NOEXCEPT
-#define ZIRSAKHT_CONSTEXPR
+#if defined(_MSVC_LANG)
+#define ZIRSAKHT_CPP_VERSION _MSVC_LANG
 #else
-#define ZIRSAKHT_NOEXCEPT noexcept
-#define ZIRSAKHT_CONSTEXPR constexpr
+#define ZIRSAKHT_CPP_VERSION __cplusplus
+#endif
+
+#if ZIRSAKHT_CPP_VERSION >= 202002L
+#define Z_UNLIKELY [[unlikely]]
+#define Z_LIKELY [[likely]]
+#else
+#define Z_UNLIKELY
+#define Z_LIKELY
+#endif
+
+#if defined(_MSC_VER) && (_MSC_VER < 1900)
+#define Z_NOEXCEPT _NOEXCEPT
+#define Z_CONSTEXPR
+#else
+#define Z_NOEXCEPT noexcept
+#define Z_CONSTEXPR constexpr
 #endif

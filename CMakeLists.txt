@@ -43,6 +43,10 @@ if(ZIRSAKHT_BUILD_STATIC)
 	list(APPEND zirsakht_build_targets "static")
 endif()
 
+# ----- external libraries -----
+
+# ------------------------------
+
 message(STATUS "")
 message(STATUS "Library Name        : ${zirsakht_libname}")
 message(STATUS "CXX Compiler        : ${CMAKE_CXX_COMPILER}")

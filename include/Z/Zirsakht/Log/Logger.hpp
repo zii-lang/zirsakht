@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Z/Zirsakht/Common.hpp>
-#include <Z/Zirsakht/Log/LogLevel.hpp>
+#include <Z/Zirsakht/Log/Level.hpp>
 
 #include <string>
 #include <string_view>
@@ -15,16 +15,15 @@ namespace Z::Zirsakht::Log {
       public:
         explicit Logger(std::string name) : _name(std::move(name)) {};
         virtual ~Logger() = default;
-        Logger(Logger &&other) ZIRSAKHT_NOEXCEPT;
-        Logger &operator=(Logger &&other) ZIRSAKHT_NOEXCEPT;
+        Logger(Logger &&other) Z_NOEXCEPT;
+        Logger &operator=(Logger &&other) Z_NOEXCEPT;
 
-        virtual void log(Level level, std::string_view message) = 0;
-        virtual void trace(std::string_view message)            = 0;
-        virtual void debug(std::string_view message)            = 0;
-        virtual void info(std::string_view message)             = 0;
-        virtual void warn(std::string_view message)             = 0;
-        virtual void error(std::string_view message)            = 0;
-        virtual void critical(std::string_view message)         = 0;
+        virtual void trace(std::string_view message)    = 0;
+        virtual void debug(std::string_view message)    = 0;
+        virtual void info(std::string_view message)     = 0;
+        virtual void warn(std::string_view message)     = 0;
+        virtual void error(std::string_view message)    = 0;
+        virtual void critical(std::string_view message) = 0;
 
         void set_level(Level level) {
             _level = level;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Z/Zirsakht/Log/LogLevel.hpp>
+#include <Z/Zirsakht/Log/Level.hpp>
 
 #include <chrono>
 #include <string_view>
@@ -9,24 +9,25 @@ namespace Z::Zirsakht::Log {
     using Timepoint  = std::chrono::system_clock::time_point;
     using Stringview = std::string_view;
 
-    struct LogMessage {
-        LogMessage()                                   = default;
-        LogMessage(const LogMessage &other)            = default;
-        LogMessage &operator=(const LogMessage &other) = default;
+    struct Message {
+        Message()                                = default;
+        Message(const Message &other)            = default;
+        Message &operator=(const Message &other) = default;
 
-        LogMessage(Stringview message) : payload(message) {};
-        LogMessage(Stringview message, Timepoint log_time) :
+        Message(Stringview message) : payload(message) {};
+        Message(Stringview message, Timepoint log_time) :
             payload(message), timestamp(log_time) {};
-        LogMessage(Level level, Stringview message) :
+        Message(Level level, Stringview message) :
             level(level), payload(message) {};
-        LogMessage(Level level, Stringview message, Timepoint log_time) :
+        Message(Level level, Stringview message, Timepoint log_time) :
             level(level), payload(message), timestamp(log_time) {};
-        LogMessage(Timepoint log_time, Stringview logger_name, Level level,
-                   Stringview message) :
+        Message(Timepoint log_time, Stringview logger_name, Level level,
+                Stringview message) :
             logger_name(logger_name), level(level), timestamp(log_time),
             payload(message) {};
 
         Stringview logger_name{};
+        Stringview tag{};
         Level      level{Level::Off};
         Timepoint  timestamp{std::chrono::zoned_time{
             std::chrono::current_zone(), std::chrono::system_clock::now()}};

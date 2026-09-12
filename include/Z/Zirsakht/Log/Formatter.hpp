@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Z/Zirsakht/Log/LogMessage.hpp>
+#include <Z/Zirsakht/Log/Message.hpp>
 #include <Z/Zirsakht/Memory/MemoryBuffer.hpp>
 
 namespace Z::Zirsakht::Log {
@@ -8,7 +8,7 @@ namespace Z::Zirsakht::Log {
     class Formatter {
       public:
         virtual ~Formatter()                             = default;
-        virtual void format(const LogMessage      &message,
+        virtual void format(const Message         &message,
                             DestenationBufferType &dest) = 0;
     };
 } // namespace Z::Zirsakht::Log

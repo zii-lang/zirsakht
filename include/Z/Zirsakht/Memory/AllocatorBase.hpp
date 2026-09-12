@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Z/Zirsakht/Common.hpp>
+
 #include <cstddef>
 
 namespace Z::Zirsakht::Memory {
@@ -29,7 +31,7 @@ namespace Z::Zirsakht::Memory {
         }
 
         [[nodiscard]]
-        std::size_t allocation_count() const noexcept {
+        std::size_t allocation_count() const Z_NOEXCEPT {
             return m_allocation_count;
         }
     };

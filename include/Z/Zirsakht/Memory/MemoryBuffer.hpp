@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Z/Zirsakht/Common.hpp>
+
 #include <algorithm>
 #include <cstddef>
 #include <cstring>
@@ -54,7 +56,7 @@ namespace Z::Zirsakht::Memory {
         BasicMemoryBuffer(const BasicMemoryBuffer &)            = delete;
         BasicMemoryBuffer &operator=(const BasicMemoryBuffer &) = delete;
 
-        BasicMemoryBuffer(BasicMemoryBuffer &&other) noexcept {
+        BasicMemoryBuffer(BasicMemoryBuffer &&other) Z_NOEXCEPT {
             if (other.m_data == other.m_inline) {
                 std::move(other.m_inline, other.m_inline + other.m_size,
                           m_inline);
@@ -75,7 +77,7 @@ namespace Z::Zirsakht::Memory {
             }
         }
 
-        BasicMemoryBuffer &operator=(BasicMemoryBuffer &&other) noexcept {
+        BasicMemoryBuffer &operator=(BasicMemoryBuffer &&other) Z_NOEXCEPT {
             if (this == &other)
                 return *this;
 
@@ -151,7 +153,7 @@ namespace Z::Zirsakht::Memory {
             return *element;
         }
 
-        void clear() noexcept {
+        void clear() Z_NOEXCEPT {
             if constexpr (!std::is_trivially_destructible_v<T>) {
                 std::destroy(m_data, m_data + m_size);
             }
@@ -159,43 +161,43 @@ namespace Z::Zirsakht::Memory {
             m_size = 0;
         }
 
-        T *data() noexcept {
+        T *data() Z_NOEXCEPT {
             return m_data;
         }
 
-        const T *data() const noexcept {
+        const T *data() const Z_NOEXCEPT {
             return m_data;
         }
 
-        T &operator[](std::size_t index) noexcept {
+        T &operator[](std::size_t index) Z_NOEXCEPT {
             return m_data[index];
         }
 
-        const T &operator[](std::size_t index) const noexcept {
+        const T &operator[](std::size_t index) const Z_NOEXCEPT {
             return m_data[index];
         }
 
-        T &back() noexcept {
+        T &back() Z_NOEXCEPT {
             return m_data[m_size - 1];
         }
 
-        const T &back() const noexcept {
+        const T &back() const Z_NOEXCEPT {
             return m_data[m_size - 1];
         }
 
-        std::size_t size() const noexcept {
+        std::size_t size() const Z_NOEXCEPT {
             return m_size;
         }
 
-        std::size_t capacity() const noexcept {
+        std::size_t capacity() const Z_NOEXCEPT {
             return m_capacity;
         }
 
-        bool empty() const noexcept {
+        bool empty() const Z_NOEXCEPT {
             return m_size == 0;
         }
 
-        bool using_inline_storage() const noexcept {
+        bool using_inline_storage() const Z_NOEXCEPT {
             return m_data == m_inline;
         }
 

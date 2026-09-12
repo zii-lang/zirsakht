@@ -4,7 +4,7 @@
 #include <string_view>
 
 #include <Z/Zirsakht/Log/DefaultFormatter.hpp>
-#include <Z/Zirsakht/Log/LogMessage.hpp>
+#include <Z/Zirsakht/Log/Message.hpp>
 #include <Z/Zirsakht/Memory/MemoryBuffer.hpp>
 
 namespace Z::Zirsakht::Log::Tests {
@@ -24,8 +24,8 @@ namespace Z::Zirsakht::Log::Tests {
         const auto timestamp =
             system_clock::time_point{seconds{1757244642} + milliseconds{123}};
 
-        const LogMessage message{timestamp, "Lexer", Level::Info,
-                                 "Starting lexing"};
+        const Message message{timestamp, "Lexer", Level::Info,
+                              "Starting lexing"};
 
         Buffer buffer;
 
@@ -40,8 +40,8 @@ namespace Z::Zirsakht::Log::Tests {
 
         const auto timestamp = system_clock::time_point{seconds{1757244642}};
 
-        const LogMessage message{timestamp, "", Level::Error,
-                                 "Something went wrong"};
+        const Message message{timestamp, "", Level::Error,
+                              "Something went wrong"};
 
         Buffer buffer;
 
@@ -56,7 +56,7 @@ namespace Z::Zirsakht::Log::Tests {
 
         const auto timestamp = system_clock::time_point{seconds{1757244642}};
 
-        const LogMessage message{timestamp, "Parser", Level::Debug, ""};
+        const Message message{timestamp, "Parser", Level::Debug, ""};
 
         Buffer buffer;
 
@@ -83,7 +83,7 @@ namespace Z::Zirsakht::Log::Tests {
         };
 
         for (const auto &test: cases) {
-            LogMessage message{timestamp, "Test", test.level, "message"};
+            Message message{timestamp, "Test", test.level, "message"};
 
             Buffer buffer;
 
@@ -94,7 +94,7 @@ namespace Z::Zirsakht::Log::Tests {
     }
 
     TEST_F(LogFormatTest, DoesNotModifyEmptyBufferBeforeFormatting) {
-        LogMessage message{"hello"};
+        Message message{"hello"};
 
         Buffer buffer;
 

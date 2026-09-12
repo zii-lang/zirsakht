@@ -24,7 +24,7 @@ namespace Z::Zirsakht::Log {
         return "UNKNOWN";
     }
 
-    void DefaultFormatter::format(const LogMessage      &message,
+    void DefaultFormatter::format(const Message         &message,
                                   DestenationBufferType &dest) {
         auto seconds = std::chrono::time_point_cast<std::chrono::seconds>(
             message.timestamp);

@@ -5,7 +5,7 @@
 namespace Z::Zirsakht::Log {
     class DefaultFormatter : public Formatter {
       public:
-        void format(const LogMessage &, DestenationBufferType &) override;
+        void format(const Message &, DestenationBufferType &) override;
 
         static DefaultFormatter &instance() {
             static DefaultFormatter instance;
