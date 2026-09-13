@@ -3,7 +3,7 @@
 #ifndef Z_IO_SOURCEFILE_H
 #define Z_IO_SOURCEFILE_H
 
-#include <Z/System.hpp>
+#include <Z/Zirsakht/Common.hpp>
 
 #include <cstddef>
 #include <filesystem>
@@ -48,10 +48,10 @@ namespace Z::IO {
 
         // ==========================
 
-#if ZCORE_OS_WINDOWS
+#if ZIRSAKHT_OS_WINDOWS
         HANDLE file    = INVALID_HANDLE_VALUE;
         HANDLE mapping = nullptr;
-#elif ZCORE_POSIX
+#elif ZIRSAKHT_POSIX
         int file = -1;
 #endif
     };
