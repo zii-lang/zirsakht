@@ -27,7 +27,8 @@ namespace Z::Zirsakht::Log {
     }
 
     void SpdlogLogger::log(Level level, std::string_view message) {
-        logger->log(to_spdlog_level(level), "{}", message);
+        assert(this->logger != nullptr);
+        this->logger->log(to_spdlog_level(level), "{}", message);
     }
 
     template<typename... Args>
@@ -37,8 +38,8 @@ namespace Z::Zirsakht::Log {
         if (!should_log) {
             return;
         }
-        logger->log(to_spdlog_level(level), format,
-                    std::forward<Args>(args)...);
+        this->logger->log(to_spdlog_level(level), format,
+                          std::forward<Args>(args)...);
     }
 } // namespace Z::Zirsakht::Log
 

@@ -5,6 +5,7 @@
 #if ZIRSAKHT_HAS_SPDLOG
 
 #include <Z/Zirsakht/Log/ILogger.hpp>
+#include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
 
 #include <format>
@@ -12,9 +13,19 @@
 
 namespace Z::Zirsakht::Log {
     class SpdlogLogger final : public ILogger {
-#if ZIRSAKHT_HAS_SPDLOG
         std::shared_ptr<spdlog::logger> logger;
-#endif
+
+      public:
+        explicit SpdlogLogger() {
+            auto console_sink =
+                std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+
+            this->logger =
+                std::make_shared<spdlog::logger>("spdlog", console_sink);
+
+            this->logger->set_level(spdlog::level::info);
+            this->logger->log(spdlog::level::info, "Logger created.");
+        };
 
         void log(Level level, std::string_view message) override;
 
