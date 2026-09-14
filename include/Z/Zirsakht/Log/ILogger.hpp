@@ -17,5 +17,9 @@ namespace Z::Zirsakht::Log {
         bool should_log(Level level) {
             return level >= this->_log_level;
         }
+
+        void set_log_level(Level level) {
+            this->_log_level = level;
+        }
     };
 } // namespace Z::Zirsakht::Log

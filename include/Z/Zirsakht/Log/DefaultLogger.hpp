@@ -11,6 +11,10 @@ namespace Z::Zirsakht::Log {
         static DefaultLogger _baseLogger;
 
       public:
+        static void set_default_log_level(Level level) {
+            _baseLogger.set_log_level(level);
+        }
+
         static void out(Level level, std::string_view message) {
             _baseLogger.log(level, message);
         }
