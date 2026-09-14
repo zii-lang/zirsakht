@@ -7,6 +7,8 @@
 #include <string_view>
 
 namespace Z::Zirsakht::Log {
+    DefaultLogger DefaultLogger::_baseLogger{};
+
     void DefaultLogger::log(Level level, std::string_view message) {
         bool should_log = this->should_log(level);
         if (!should_log) {

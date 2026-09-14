@@ -62,4 +62,14 @@ namespace Z::Zirsakht::Log::Tests {
 
         EXPECT_NE(output.find("Hello World"), std::string::npos);
     }
+
+    TEST(LoggerTest, DefaultLoggerStaticLog) {
+        testing::internal::CaptureStdout();
+
+        DefaultLogger::out(Log::Level::Info, "Hello World");
+
+        const std::string output = testing::internal::GetCapturedStdout();
+
+        EXPECT_NE(output.find("Hello World"), std::string::npos);
+    }
 } // namespace Z::Zirsakht::Log::Tests
