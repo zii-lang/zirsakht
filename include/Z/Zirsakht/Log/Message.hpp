@@ -16,11 +16,11 @@ namespace Z::Zirsakht::Log {
 
         Message(Stringview message) : payload(message) {};
         Message(Stringview message, Timepoint log_time) :
-            payload(message), timestamp(log_time) {};
+            timestamp(log_time), payload(message) {};
         Message(Level level, Stringview message) :
             level(level), payload(message) {};
         Message(Level level, Stringview message, Timepoint log_time) :
-            level(level), payload(message), timestamp(log_time) {};
+            level(level), timestamp(log_time), payload(message) {};
         Message(Timepoint log_time, Stringview logger_name, Level level,
                 Stringview message) :
             logger_name(logger_name), level(level), timestamp(log_time),
@@ -29,7 +29,7 @@ namespace Z::Zirsakht::Log {
         Stringview logger_name{};
         Stringview tag{};
         Level      level{Level::Off};
-		Timepoint  timestamp{std::chrono::system_clock::now()};
+        Timepoint  timestamp{std::chrono::system_clock::now()};
         Stringview payload;
     };
 }; // namespace Z::Zirsakht::Log
